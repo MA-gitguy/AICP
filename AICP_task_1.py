@@ -22,14 +22,14 @@ def main_component(category, Type, price):
 
 def discount(x, Pri_1, Pri_2):
     Total_Price = Pri_1 + Pri_2
-    if x >= 0 & x<1:
+    if x<2 and x>0:
         Discount = Total_Price*5/100
         Total_Price = Total_Price - Discount
-        print("Your Total Price of computer with 5% Discount is: ", Total_Price)
+        print("\nYour Total Price of computer with 5% Discount is: ", Total_Price)
     else:
         Discount = Total_Price*10/100
         Total_Price = Total_Price - Discount
-        print("Your Total Price of computer with 10% Discount is: ", Total_Price)   
+        print("\nYour Total Price of computer with 10% Discount is: ", Total_Price)   
 
 
 def main():
