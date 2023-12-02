@@ -1,6 +1,6 @@
-print("Enter 1 to calculate area, perimeter and sum of angles of hexagon:")
+print("\nEnter 1 to calculate area, perimeter and sum of angles of hexagon:")
 print("Enter 2 to calculate area and perimeter of square:")
-print("Press any other key to exit:")
+print("Press any other key to exit:\n")
 selected_category = input()
 
 cnic_id = ["1710172955523"]
