@@ -10,7 +10,8 @@ a = 120
 
 def calcAngleSum(area_hex, Peri_hex):
     angle_sum = (6^2)*a
-    print("Area of hexagon is:",area_hex,"\nPerimeter of hexagon is:", Peri_hex,"\nSum of angles of hexagon is:", angle_sum)
+    print("Area of hexagon is:",area_hex,"\nPerimeter of hexagon is:",
+    Peri_hex,"\nSum of angles of hexagon is:", angle_sum)
     
 
 def calcPeri(area_hex):
