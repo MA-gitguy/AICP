@@ -1,10 +1,12 @@
-# Constants
+# ..Task_6..
+
+
+#Prices
 CEMENT_PRICE = 3
 GRAVEL_PRICE = 2
 SAND_PRICE = 2
 SPECIAL_PACK_PRICE = 10
 
-# Task 1 - Check the contents and weight of a single sack
 def check_single_sack():
     print("Enter details for a single sack:")
     contents = input("Contents (C for cement, G for gravel, S for sand): ").upper()
@@ -25,9 +27,8 @@ def check_single_sack():
         print("Rejected Sack - Reasons:")
         print("  - Invalid contents")
 
-    return 0  # Return 0 to indicate rejection
+    return 0
 
-# Task 2 - Check a customer’s order for delivery
 def check_customer_order():
     total_weight = 0
     sacks_rejected = 0
@@ -62,7 +63,7 @@ def check_customer_order():
 
     return num_cement, num_gravel, num_sand  # Return the counts for Task 3
 
-# Task 3 - Calculate the price for a customer’s order
+
 def calculate_order_price(num_cement, num_gravel, num_sand):
     regular_price = 0
     num_special_packs = 0
@@ -83,6 +84,6 @@ def calculate_order_price(num_cement, num_gravel, num_sand):
     else:
         print("No special packs in the order. No discount applied.")
 
-# Test the tasks
+
 order_counts = check_customer_order()
 calculate_order_price(*order_counts)
