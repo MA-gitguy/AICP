@@ -1,4 +1,5 @@
-# Constants
+# .. AICP_8 ..
+
 NUM_BOATS = 10
 OPENING_HOUR = 10
 CLOSING_HOUR = 17
@@ -17,17 +18,18 @@ def calculate_daily_profit_one_boat(boat_number):
             print("Invalid starting hour. Boat can only be hired between 10:00 and 17:00.")
             return
 
-        duration = float(input("Enter the duration in hours (0.5 or 1): "))
-        if duration not in [0.5, 1]:
-            print("Invalid duration. Please enter 0.5 or 1.")
+        return_hour = int(input("Enter the return hour (10-17): "))
+        if not (OPENING_HOUR <= return_hour <= CLOSING_HOUR):
+            print("Invalid return hour. Boat can only be returned between 10:00 and 17:00.")
             return
 
-        # Calculate cost and update data
+        # Calculate duration and cost, then update data
+        duration = return_hour - start_hour
         cost = duration * (HALF_HOUR_RATE if duration == 0.5 else HOURLY_RATE)
         boats_data[boat_number - 1]['hours_hired'] += duration
-        boats_data[boat_number - 1]['return_time'] = start_hour + duration
+        boats_data[boat_number - 1]['return_time'] = return_hour
 
-        print(f"Boat {boat_number} hired for {duration} hour(s). Cost: ${cost:.2f}")
+        print(f"Boat {boat_number} hired from {start_hour} to {return_hour}. Duration: {duration} hour(s). Cost: ${cost:.2f}\n")
 
     except ValueError:
         print("Invalid input. Please enter valid numeric values.")
@@ -36,13 +38,14 @@ def calculate_daily_profit_one_boat(boat_number):
 def find_next_available_boat():
     current_hour = float(input("Enter the current hour: "))
     
-    available_boats = [i + 1 for i, boat in enumerate(boats_data) if current_hour >= boat['return_time']]
+    available_boats = [i + 1 for i, boat in enumerate(boats_data) if boat['return_time'] is not None and current_hour >= boat['return_time']]
     
     if not available_boats:
-        next_available_time = min(boat['return_time'] for boat in boats_data)
+        next_available_time = min(boat['return_time'] for boat in boats_data if boat['return_time'] is not None)
         print(f"No boats available. Next available time: {next_available_time}")
     else:
         print(f"Available boats: {available_boats}")
+
 
 # Task 3 - Calculate the money taken for all the boats at the end of the day
 def calculate_daily_profit_all_boats():
@@ -58,9 +61,10 @@ def calculate_daily_profit_all_boats():
     print(f"Number of boats not used: {unused_boats}")
     print(f"Boat {most_used_boat} was used the most with {boats_data[most_used_boat - 1]['hours_hired']} hours.")
 
-# Test the tasks
-for i in range(1, NUM_BOATS + 1):
-    calculate_daily_profit_one_boat(i)
+# Loop for boat selection
+for boat_number in range(1, NUM_BOATS + 1):
+    calculate_daily_profit_one_boat(boat_number)
 
-find_next_available_boat()
+# Calculate the daily profit for all boats before displaying the remaining information
 calculate_daily_profit_all_boats()
+find_next_available_boat()
